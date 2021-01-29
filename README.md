@@ -13,11 +13,9 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 	- [Skywater PDK](#Skywater-PDK)
  	- [Invoking OpenLANE](#Invoking-OpenLANE)
  	- [Package Importing](#Package-Importing)
- 	- [Design Folder](#Design-Folder)
- 	- [Design Folder Hierarchy](#Design-Folder-Hierarchy) 
-	- [Configuration Files](#Configuration-Files)
 	- [Prepare Design](#Prepare-Design)
  	- [Synthesis](#Synthesis)
+	- [Configuration Files](#Configuration-Files)
 - [Day-2 Floorplanning and Standard Cells](#Day-2-Floorplanning-and-Standard-Cells)
 	- [Aspect Ratio and Utilization Factor](#Aspect-Ratio-and-Utilization-Factor)
 	- [Preplaced Cells](#Preplaced-Cells)
@@ -74,7 +72,7 @@ The various stages of flow are as shown below.
 
 ![](Images/ASICFLOW.png)
 
-# Day 1 Inception of Open Source EDA
+# Day-1-> Inception of Open Source EDA
 
 # Introduction Openlane FLow
 
@@ -82,16 +80,16 @@ The various stages of flow are as shown below.
 
 OpenLANE flow consists of several steps. All flow steps follow the sequence by default. Each step may consist of multiple sub-steps.The different components in the OpenLANE and their use is stated below.
   
-      Yosys-       RTL Synthesis
-      abc-         Technology Mapping
-      OpenSTA-     Static Timing Analysis
-      Fault –      Design for Testability
-      OpenROAD-    Physical Design
-      FastRoute-   Global Routing
-      TritonRoute- Detailed Routing
-      SPEFEXTRACT- SPEF Extraction
-      Magic-       GDSII layout,DRC and Antenna Checks
-      Netgen-      LVS Checks 
+      Yosys        -RTL Synthesis
+      abc          -Technology Mapping
+      OpenSTA      -Static Timing Analysis
+      Fault        -Design for Testability
+      OpenROAD     -Physical Design
+      FastRoute    -Global Routing
+      TritonRoute  -Detailed Routing
+      SPEFEXTRACT  -SPEF Extraction
+      Magic        -GDSII layout,DRC and Antenna Checks
+      Netgen       -LVS Checks 
   
 
 # Skywater PDK
@@ -108,33 +106,31 @@ Now to invoke the tool type `./flow.tcl` and to run it in the interactive mode t
 ![](Images/day1_3.png)
 
 
-Package Importing
-Different software dependencies are needed to run OpenLANE. To import these into the OpenLANE tool we need to run:
+# Package Importing
+Different software dependencies are required to run OpenLANE flow and to import these into the OpenLANE tool we need to run `package require openlane 0.9`
+ 
 ![](Images/day1_4.png)
 
-Prepare Design
-Prep is used to make file structure for our design. To set this up do:
-
-After running this look in the openlane/design/picro32a folder and you will see there is a new directory structure created in this folder under the runs folder so to enable OpenLANE flow:
+# Prepare Design
+Prep is used to make file structure for our design. Use `prep -design <design_name>`. here design_name is the name of our design i.e. "picorv32a".
+And to save it into a custom named folder use `prep -design <design_name> -tag <foldername>`.
+Also the merging of Cell lef and Technology lef takes place in the preperation step and the merged.lef file is generated.
 ![](Images/day1_5.png)
 
-
-
 # Synthesis-
-To run synthesis `run_synthesis`
+To run synthesis use `run_synthesis`.
+
 ![](Images/day1_6.PNG)
 
 ![](Images/day1_7.png)
 
-Src folder - Contains verilog files and sdc constraint files
-Config.tcl files - Design specific configuration switches used by OpenLANE
-
-An example of a configuration file is given:
+# Configuration Files
+These file contains the Design specs that are used to configure the parameters and initial setting for design.
 
 ![](Images/day1_9.png)
 
 
-# Day 2 Chip Floorplanning and Standard Cells
+# Day-2-> Chip Floorplanning and Standard Cells
 
 
 
