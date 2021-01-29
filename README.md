@@ -5,7 +5,7 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 
 ![](Images/eadvanced_physical_design.png)
 
-# Table of Contents
+## Table of Contents
 - [About](#About)
 - [RTL-GDSII Flow](#RTL-GDSII-Flow)
 - [Day-1 Opensource EDA, OpenLANE, Skywater130 PDK](#Day-1-Opensource-EDA,-OpenLANE,-Skywater130-PDK)
@@ -55,11 +55,11 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 - [Contact Information](#contact-information)
 
 
-# About
+## About
 This project gives an interactive design experience using the open-source tool OpenLANE.
 OpenLANE is an automated RTL to GDSII flow that includes other open-source tools like OpenROAD, Yosys, Magic, Netgen, Fault, Open STA, TriRoute. The goal of OpenLANE is to produce GDSII files without any human intervention. OpenLANE is tuned for Skywater 130nm open-source PDK and can be used to develop hard macros and chips.
 
-# RTL to GDSII 
+## RTL to GDSII 
 RTL to GDSII design flow is an IC design process that includes different steps such as Chip specification, RTL Synthesis, Floor Planning, Placement, Routing, Verification, etc. An ASIC is designed for a particular use, rather than intended for general-purpose use. And with the help of OpenLANE, you can implement the RTL to GDSII flow with interactive mode as well as non-interactive mode. 
 
 
@@ -72,9 +72,9 @@ The various stages of flow are as shown below.
 
 ![](Images/ASICFLOW.png)
 
-# Day-1-> Inception of Open Source EDA
+## Day-1-> Inception of Open Source EDA
 
-# Introduction Openlane FLow
+### Introduction Openlane FLow
 
 ![](Images/openlane_flow.png)
 
@@ -85,6 +85,7 @@ OpenLANE flow consists of several steps. All flow steps follow the sequence by d
       OpenSTA      -Static Timing Analysis
       Fault        -Design for Testability
       OpenROAD     -Physical Design
+      TritonCTS    -Clock Distribution
       FastRoute    -Global Routing
       TritonRoute  -Detailed Routing
       SPEFEXTRACT  -SPEF Extraction
@@ -92,10 +93,10 @@ OpenLANE flow consists of several steps. All flow steps follow the sequence by d
       Netgen       -LVS Checks 
   
 
-# Skywater PDK
+### Skywater PDK
 The SkyWater Open Source PDK is a collaboration between Google and SkyWater Technology Foundry to provide a fully open source Process Design Kit and related resources, which can be used to create manufacturable designs at SkyWater’s facility. Process Design Kit (PDK) is the interface between the foundry and the CAD designers. The PDK is a set of files used to model the fabrication process for the EDA tools used in designing an IC. PDK’s are generally not available publicly and hence are the limiting factor to open-source Digital ASIC Design. 
 
-# Invoking OpenLane
+### Invoking OpenLane
 
 These are the contents of the OpenLANE flow Directory.
 
@@ -106,31 +107,32 @@ Now to invoke the tool type `./flow.tcl` and to run it in the interactive mode t
 ![](Images/day1_3.png)
 
 
-# Package Importing
+### Package Importing
 Different software dependencies are required to run OpenLANE flow and to import these into the OpenLANE tool we need to run `package require openlane 0.9`
  
 ![](Images/day1_4.png)
 
-# Prepare Design
+### Prepare Design
 Prep is used to make file structure for our design. Use `prep -design <design_name>`. here design_name is the name of our design i.e. "picorv32a".
 And to save it into a custom named folder use `prep -design <design_name> -tag <foldername>`.
 Also the merging of Cell lef and Technology lef takes place in the preperation step and the merged.lef file is generated.
 ![](Images/day1_5.png)
 
-# Synthesis-
+### Synthesis-
 To run synthesis use `run_synthesis`.
 
 ![](Images/day1_6.PNG)
 
 ![](Images/day1_7.png)
 
-# Configuration Files
+### Configuration Files
 These file contains the Design specs that are used to configure the parameters and initial setting for design.
 
 ![](Images/day1_9.png)
 
 
-# Day-2-> Chip Floorplanning and Standard Cells
+## Day-2-> Chip Floorplanning and Standard Cells
+
 
 
 
@@ -148,87 +150,9 @@ These file contains the Design specs that are used to configure the parameters a
 ![](Images/day2_9.png)
 
 ![](Images/day2_10.png)
-In Floorplanning we typically set the:
-
-Die Area
-Core Area
-Core Utilization
-Aspect Ratio
-Place Macros
-Power distribution network (Normally done here but done later in OpenLANE)
-Place input and output pins
 
 
-Aspect Ratio and Utilization Factor
-Two key descriptions of a floorplan are utilization and aspect ratio. The amount of area of the die core the standard cells are taking up is called utilization. Normally we go for 50-70% utilization to, or utilization factor of 0.5-0.7. Keeping within this range allows for optimization of placement and realizable routing of a system. Aspect ratio can specify the shape of your chip by the height of the core area divided by the width of the core area. An aspect ratio of 1 discribes the chip as a square.
-
-Preplaced Cells
-Preplaced cells, or MACRO’s, are important to enable hierarchical PnR flow. Preplaced cells enable VLSI engineers to granularize a larger design. In floorplanning we define locations and blockages for preplaced cells. Blockages are needed to ensure no standard cells are mapped where the placeplaced cells are located.
-
-Decoupling Capacitors
-Decoupling capacitors are placed local to preplaced cells during Floorplanning. Voltage drops associated with interconnect wires can heavily affect our noise margin or put it into an indeterminate state. Decoupling capacitor is a big capacitor located next to the macros to fix this problem. The capacitor will charge up to the power supply voltage over time and it will work as a charge reservoir when a transition is needed by the circuit instead of the charge coming from the power supply. Therefore it “decouples” the circuit from the main supply. The capacitor acts like the power supply.
-
-Power Planning
-Power planning during the Floorplanning phase is essential to lower noise in digital circuits attributed to voltage droop and ground bounce. Coupling capacitance is formed between interconnect wires and the substrate which needs to be charged or discharged to represent either logic 1 or logic 0. When a transition occurs on a net, charge associated with coupling capacitors may be dumped to ground. If there are not enough ground taps charge will accumulate at the tap and the ground line will act like a large resistor, raising the ground voltage and lowering our noise margin. To bypass this problem a robust PDN with many power strap taps are needed to lower the resistance associated with the PDN.
-
-Pin Placement
-Pin placement is an essential part of floorplanning to minimize buffering and improve power consumption and timing delays. The goal of pin placement is to use the connectivity information of the HDL netlist to determine where along the I/O ring a specific pin should be placed. In many cases, optimal pin placement will be accompanied with less buffering and therefore less power consumption. After pin placement is formed we need to place logical cell blockages along the I/O ring to discriminate between the core area and I/O area.
-
-Floorplanning with OpenLANE
-To run floorplan in OpenLANE:
-
-As with all other stages, the floorplanning will be run according to configuration settings in the design specific config.tcl file. The output the the floorplanning phase is a DEF file which describes core area and placement of standard cell SITES:
-
-
-Viewing Floorplan in Magic
-To view our floorplan in Magic we need to provide three files as input:
-
-Magic technology file (sky130A.tech)
-Def file of floorplan
-Merged LEF file
-
-
-
-
-Placement
-The next step in the Digital ASIC design flow after floorplanning is placement. The synthesized netlist has been mapped to standard cells and floorplanning phase has determined the standard cells rows, enabling placement. OpenLANE does placement in two stages:
-
-Global Placement - Optimized but not legal placement. Optimization works to reduce wirelength by reducing half parameter wirelength
-Detailed Placement - Legalizes placement of cells into standard cell rows while adhering to global placement
-
-To do placement in OpenLANE:
-
-For placement to converge the overflow value needs to be converging to 0. At the end of placement cell legalization will be reported:
-
-
-Viewing Placement in Magic
-To view placement in Magic the command mirrors viewing floorplanning:
-
-
-
-Standard Cell Design Flow
-Cell design is done in 3 parts:
-
-Inputs - PDKs (Process design kits), DRC & LVS rules, SPICE models, library & user-defined specs.
-Design Steps - Design steps of cell design involves Circuit Design, Layout Design, Characterization. The software GUNA used for characterization. The characterization can be classified as Timing characterization, Power characterization and Noise characterization.
-Outputs - Outputs of the Design are CDL (Circuit Description Language), GDSII, LEF, extracted Spice netlist (.cir), timing, noise, power.libs, function.
-
-
-Standard Cell Characterization
-Standard Cell Libraries consist of cells with different functionality/drive strengths. These cells need to be characterized by liberty files to be used by synthesis tools to determine optimal circuit arrangement. The open-source software GUNA is used for characterization.
-Characterization is a well-defined flow consisting of the following steps:
-
-Link Model File of CMOS containing property definitions
-Specify process corner(s) for the cell to be characterized
-Specify cell delay and slew thresholds percentages
-Specify timing and power tables
-Read the parasitic extracted netlist
-Apply input or stimulus
-Provide necessary simulation commands
-
-
-
-# Day 3 Design Library Cell
+## Day 3 Design Library Cell
 
 ![](Images/day3_1.PNG)
 
@@ -358,7 +282,7 @@ The plot can be viewed by plotting the output vs time while sweeping the input:
 
 
 
-# Day 4 Layout Timing Analysis and CTS
+## Day 4 Layout Timing Analysis and CTS
 
 ![](Images/day4_1.PNG)
 
@@ -497,7 +421,7 @@ Note: Whenever the DEF file changes we need to recreate this .db file
 After .db generation users can perform tool configuration followed by reporting the propagated clock timing analysis:
 
 
-# Day 5 Final Steps in RTL to GDSII
+## Day 5 Final Steps in RTL to GDSII
 ![](Images/day5_1.PNG)
 
 ![](Images/day5_2.PNG)
@@ -548,10 +472,10 @@ SPEF Extraction
 After routing has been completed interconnect parasitics can be extracted to perform sign-off post-route STA analysis. The parasitics are extracted into a SPEF file. The SPEF extractor is not included within OpenLANE as of now.
 
 
-# Acknowledgements
+## Acknowledgements
 
 * [Kunal Ghosh - Co-founder (VSD Corp. Pvt. Ltd)](https://github.com/kunalg123)
 * [Nickson Jose - VSD VLSI Engineer](https://github.com/nickson-jose)
-# Contact
+## Contact
 Mayur Pohane - mayur17pohane@gmail.com
 
