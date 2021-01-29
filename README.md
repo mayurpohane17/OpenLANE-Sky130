@@ -131,25 +131,49 @@ These file contains the Design specs that are used to configure the parameters a
 ![](Images/day1_9.png)
 
 
-## Day-2-> Chip Floorplanning and Standard Cells
 
+## Day-2-> Floorplanning and Placement-
 
-
-
+###Floorplanning with OpenLANE
+To run floorplan in OpenLANE:
 
 ![](Images/day2_1.PNG)
 
-![](Images/day2_5.png)
-
-![](Images/day2_6.png)
+As with all other stages, the floorplanning will be run according to configuration settings in the design specific config.tcl file. The output the the floorplanning phase is a DEF file which describes core area and placement of standard cell SITES:
 
 ![](Images/day2_7.png)
+ 
+The Core area and Die area along with the Design analysis is shown below.
+
+![](Images/day2_5.png)
+
+###Viewing Floorplan in Magic
+To view our floorplan in Magic we need to provide three files as input:
+
+Magic technology file (sky130A.tech)
+Def file of floorplan
+Merged LEF file
 
 ![](Images/day2_8.png)
 
+
+###Placement
+The next step in the Digital ASIC design flow after floorplanning is placement. The synthesized netlist has been mapped to standard cells and floorplanning phase has determined the standard cells rows, enabling placement. OpenLANE does placement in two stages:
+
+Global Placement - Optimized but not legal placement. Optimization works to reduce wirelength by reducing half parameter wirelength
+Detailed Placement - Legalizes placement of cells into standard cell rows while adhering to global placement
+
+To do placement in OpenLANE:
+![](Images/day2_6.png)
+For placement to converge the overflow value needs to be converging to 0. At the end of placement cell legalization will be reported:
+
 ![](Images/day2_9.png)
 
+###Viewing Placement in Magic
+To view placement in Magic the command mirrors viewing floorplanning:
+
 ![](Images/day2_10.png)
+
 
 
 ## Day 3 Design Library Cell
