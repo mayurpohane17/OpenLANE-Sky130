@@ -9,7 +9,7 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 - [About](#About)
 - [RTL-GDSII Flow](#RTL-GDSII-Flow)
 - [Day-1 Opensource EDA, OpenLANE, Skywater130 PDK](#Day-1-Opensource-EDA,-OpenLANE,-Skywater130-PDK)
-	- [Introduction Openlane FLow](#Introduction Openlane FLow)
+	- [Introduction Openlane Flow](#Introduction-Openlane-Flow)
  	- [Invoking OpenLANE](#Invoking-OpenLANE)
  	- [Package Importing](#Package-Importing)
  	- [Design Folder](#Design-Folder)
@@ -57,27 +57,24 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 
 
 # About
-////////This project gives an interactive tutorial experied during the VSD Advanced Physical Design workshop using OpenLANE.
-OpenLANE is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, Magic, Netgen, Fault, OpenPhySyn, SPEF-Extractor and custom methodology scripts for design exploration and optimization. It is a tool started for true open source tape-out experience and comes with APACHE version 2.0 . The goal of OpenLANE is to produce clean GDSII without any human intervention. OpenLANE is tuned for Skywater 130nm open-source PDK and can be used to produce hard macros and chips.
+This project gives an interactive design experience using the open-source tool OpenLANE.
+OpenLANE is an automated RTL to GDSII flow that includes other open-source tools like OpenROAD, Yosys, Magic, Netgen, Fault, Open STA, TriRoute. The goal of OpenLANE is to produce GDSII files without any human intervention. OpenLANE is tuned for Skywater 130nm open-source PDK and can be used to develop hard macros and chips.
 
 # RTL to GDSII 
-
+RTL to GDSII design flow is an IC design process that includes different steps such as Chip specification, RTL Synthesis, Floor Planning, Placement, Routing, Verification, etc. An ASIC is designed for a particular use, rather than intended for general-purpose use. And with the help of OpenLANE, you can implement the RTL to GDSII flow with interactive mode as well as non-interactive mode. 
+The inputs to the ASIC flow are-
+-1.RTL IP'S
+-2.EDA Tools
+-3.PDK kits
+The various stages of flow are as shown below. 
 
 ![](Images/ASICFLOW.png)
 
+# Day 1 Inception of Open Source EDA
 
+# Introduction Openlane FLow
 
-
-
-
-
-Workshop Introduction
-The inputs to the ASIC design flow are:
-- Process Design Rules: DRC, LVS, PEX
-- Device Models (SPICE)
-- Digital Standard Cell Libraries
-- I/O Libraries
-Process Design Kit (PDK) is the interface between the CAD designers and the foundry. The PDK is a collection of files used to model a fabrication process for the EDA tools used in designing an IC. PDK’s are traditionally closed-source and hence are the limiting factor to open-source Digital ASIC Design. Google and Skywater have broken this stigma and published the world’s first open-source PDK on June 30th, 2020. This breakthrough has been a catalyst for open-source EDA tools. This workshop focuses on using the open-source RTL2GDS EDA tool, OpenLANE, in conjunction with the Skywater 130nm PDK to perform the full RTL2GDS flow as shown below:
+![](Images/openlane_flow.png)
 
 OpenLANE flow consists of several stages. By default, all flow steps are run in sequence. Each stage may consist of multiple sub-stages. OpenLANE can also be run interactively as shown here.
 
@@ -128,14 +125,8 @@ Checks
   
       Magic - Performs DRC Checks & Antenna Checks
       Netgen - Performs LVS Checks 
-  
-
-
-# Day 1 Inception of Open Source EDA
-
-# Introduction Openlane FLow
-
-![](Images/openlane_flow.png)
+# Skywater PDK
+Process Design Kit (PDK) is the interface between the CAD designers and the foundry. The PDK is a collection of files used to model a fabrication process for the EDA tools used in designing an IC. PDK’s are traditionally closed-source and hence are the limiting factor to open-source Digital ASIC Design. Google and Skywater have broken this stigma and published the world’s first open-source PDK on June 30th, 2020. This breakthrough has been a catalyst for open-source EDA tools. This workshop focuses on using the open-source RTL2GDS EDA tool, OpenLANE, in conjunction with the Skywater 130nm PDK to perform the full RTL2GDS flow as shown below:
 
 # Invoking OpenLane
 
