@@ -10,6 +10,7 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 - [RTL-GDSII Flow](#RTL-GDSII-Flow)
 - [Day-1 Opensource EDA, OpenLANE, Skywater130 PDK](#Day-1-Opensource-EDA,-OpenLANE,-Skywater130-PDK)
 	- [Introduction Openlane Flow](#Introduction-Openlane-Flow)
+	- [Skywater PDK](#Skywater-PDK)
  	- [Invoking OpenLANE](#Invoking-OpenLANE)
  	- [Package Importing](#Package-Importing)
  	- [Design Folder](#Design-Folder)
@@ -79,82 +80,58 @@ The various stages of flow are as shown below.
 
 ![](Images/openlane_flow.png)
 
-OpenLANE flow consists of several steps. All flow steps follow the sequence by default. Each step may consist of multiple sub-steps.
+OpenLANE flow consists of several steps. All flow steps follow the sequence by default. Each step may consist of multiple sub-steps.The different components in the OpenLANE and their use is stated below.
   
-      Yosys -RTL Synthesis
-      abc - Technology Mapping
-      OpenSTA - Static Timing Analysis
-      Fault – Design for Testability
-      OpenROAD-Physical Design
-      FastRoute - Global Routing
-      TritonRoute - Detailed Routing
-      DEF2SPEF - SPEF Extraction
-      Magic - GDSII layout,DRC and Antenna Checks
-      Netgen - LVS Checks 
+      Yosys-       RTL Synthesis
+      abc-         Technology Mapping
+      OpenSTA-     Static Timing Analysis
+      Fault –      Design for Testability
+      OpenROAD-    Physical Design
+      FastRoute-   Global Routing
+      TritonRoute- Detailed Routing
+      SPEFEXTRACT- SPEF Extraction
+      Magic-       GDSII layout,DRC and Antenna Checks
+      Netgen-      LVS Checks 
   
 
 # Skywater PDK
-Process Design Kit (PDK) is the interface between the CAD designers and the foundry. The PDK is a collection of files used to model a fabrication process for the EDA tools used in designing an IC. PDK’s are traditionally closed-source and hence are the limiting factor to open-source Digital ASIC Design. Google and Skywater have broken this stigma and published the world’s first open-source PDK on June 30th, 2020. This breakthrough has been a catalyst for open-source EDA tools. This workshop focuses on using the open-source RTL2GDS EDA tool, OpenLANE, in conjunction with the Skywater 130nm PDK to perform the full RTL2GDS flow as shown below:
+The SkyWater Open Source PDK is a collaboration between Google and SkyWater Technology Foundry to provide a fully open source Process Design Kit and related resources, which can be used to create manufacturable designs at SkyWater’s facility. Process Design Kit (PDK) is the interface between the foundry and the CAD designers. The PDK is a set of files used to model the fabrication process for the EDA tools used in designing an IC. PDK’s are generally not available publicly and hence are the limiting factor to open-source Digital ASIC Design. 
 
 # Invoking OpenLane
 
-![](Images/day1_1.png)
+These are the contents of the OpenLANE flow Directory.
 
 ![](Images/day1_2.png)
 
+Now to invoke the tool type `./flow.tcl` and to run it in the interactive mode type `./flow.tcl -interactive`.
+
 ![](Images/day1_3.png)
-
-![](Images/day1_4.png)
-
-![](Images/day1_5.png)
-
-![](Images/day1_6.PNG)
-
-![](Images/day1_7.png)
-
-![](Images/day1_8.png)
-
-![](Images/day1_9.png)
-
-![](Images/day1_10.png)
-
-
-./flow.tcl is the script which runs the OpenLANE flow
-OpenLANE can be run interactively or in autonomous mode
-To run interactively, use the -interactive option with the ./flow.tcl script
 
 
 Package Importing
 Different software dependencies are needed to run OpenLANE. To import these into the OpenLANE tool we need to run:
+![](Images/day1_4.png)
+
+Prepare Design
+Prep is used to make file structure for our design. To set this up do:
+
+After running this look in the openlane/design/picro32a folder and you will see there is a new directory structure created in this folder under the runs folder so to enable OpenLANE flow:
+![](Images/day1_5.png)
 
 
-Design Folder
-All designs run within OpenLANE are extracted from the openlane/designs folder:
 
+# Synthesis-
+To run synthesis `run_synthesis`
+![](Images/day1_6.PNG)
 
-Design Folder Hierarchy
-
-Each design hierarchy comes with two distinct components:
+![](Images/day1_7.png)
 
 Src folder - Contains verilog files and sdc constraint files
 Config.tcl files - Design specific configuration switches used by OpenLANE
 
 An example of a configuration file is given:
 
-
-Prepare Design
-Prep is used to make file structure for our design. To set this up do:
-
-After running this look in the openlane/design/picro32a folder and you will see there is a new directory structure created in this folder under the runs folder so to enable OpenLANE flow:
-
-The config.tcl file shown in this folder contains all the parameters used by OpenLANE for this specific run.
-In addition, preparing the design in OpenLANE merges the technology LEF and cell LEF information. Technology LEF information contains layer definitions and a set of restricted design rules needed for PnR flow. The cell LEF contains obstruction information of each standard cell needed to minimize DRC errors during PnR flow:
-
-
-Synthesis
-To run synthesis:
-
-Note: Ensure the WNS is an acceptable number, if not please adjust the clock period to fix STA errors.
+![](Images/day1_9.png)
 
 
 # Day 2 Chip Floorplanning and Standard Cells
