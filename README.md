@@ -62,10 +62,13 @@ OpenLANE is an automated RTL to GDSII flow that includes other open-source tools
 
 # RTL to GDSII 
 RTL to GDSII design flow is an IC design process that includes different steps such as Chip specification, RTL Synthesis, Floor Planning, Placement, Routing, Verification, etc. An ASIC is designed for a particular use, rather than intended for general-purpose use. And with the help of OpenLANE, you can implement the RTL to GDSII flow with interactive mode as well as non-interactive mode. 
-The inputs to the ASIC flow are-
--1.RTL IP'S
--2.EDA Tools
--3.PDK kits
+
+
+	The inputs to the ASIC flow are-
+		1.RTL IP'S
+		2.EDA Tools
+		3.PDK kits
+	
 The various stages of flow are as shown below. 
 
 ![](Images/ASICFLOW.png)
@@ -76,55 +79,20 @@ The various stages of flow are as shown below.
 
 ![](Images/openlane_flow.png)
 
-OpenLANE flow consists of several stages. By default, all flow steps are run in sequence. Each stage may consist of multiple sub-stages. OpenLANE can also be run interactively as shown here.
-
-Synthesis
-
+OpenLANE flow consists of several steps. All flow steps follow the sequence by default. Each step may consist of multiple sub-steps.
   
-       Yosys - Performs RTL synthesis using GTech mapping
-      abc - Performs technology mappin to standard cells described in the PDK. We can adjust synthesis techniques using different integrated abc scripts to get desired results
-      OpenSTA - Performs static timing analysis on the resulting netlist to generate timing reports
-      Fault – Scan-chain insertion used for testing post fabrication. Supports ATPG and test patterns compaction
-  
-
-Floorplan and PDN
-
-  
-      Init_fp - Defines the core area for the macro as well as the rows (used for placement) and the tracks (used for routing)
-      Ioplacer - Places the macro input and output ports
-      PDN - Generates the power distribution network
-      Tapcell - Inserts welltap and decap cells in the floorplan
-      Placement – Placement is done in two steps, one with global placement in which we place the designs across the chip, but they will not be legal placement with some standard cells overlapping each other, to fix this we perform a detailed placement which legalizes the design and ensures they fit in the standard cell rows
-      RePLace - Performs global placement
-      Resizer - Performs optional optimizations on the design
-      OpenPhySyn - Performs timing optimizations on the design
-      OpenDP - Perfroms detailed placement to legalize the globally placed components
-  
-  3. CTS
-  
-      TritonCTS - Synthesizes the clock distribution network
+      Yosys -RTL Synthesis
+      abc - Technology Mapping
+      OpenSTA - Static Timing Analysis
+      Fault – Design for Testability
+      OpenROAD-Physical Design
+      FastRoute - Global Routing
+      TritonRoute - Detailed Routing
+      DEF2SPEF - SPEF Extraction
+      Magic - GDSII layout,DRC and Antenna Checks
+      Netgen - LVS Checks 
   
 
-Routing
-
-  
-      FastRoute - Performs global routing to generate a guide file for the detailed router
-      
-      TritonRoute - Performs detailed routing from global routing guides
-      SPEF-Extractor - Performs SPEF extraction that include parasitic information
-  
-
-GDSII Generation
-
-  
-      Magic - Streams out the final GDSII layout file from the routed def
-  
-
-Checks
-
-  
-      Magic - Performs DRC Checks & Antenna Checks
-      Netgen - Performs LVS Checks 
 # Skywater PDK
 Process Design Kit (PDK) is the interface between the CAD designers and the foundry. The PDK is a collection of files used to model a fabrication process for the EDA tools used in designing an IC. PDK’s are traditionally closed-source and hence are the limiting factor to open-source Digital ASIC Design. Google and Skywater have broken this stigma and published the world’s first open-source PDK on June 30th, 2020. This breakthrough has been a catalyst for open-source EDA tools. This workshop focuses on using the open-source RTL2GDS EDA tool, OpenLANE, in conjunction with the Skywater 130nm PDK to perform the full RTL2GDS flow as shown below:
 
