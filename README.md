@@ -49,7 +49,7 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 	- [Viewing Post-CTS Netlist](#Viewing-Post-CTS-Netlist)
 	- [Post-CTS STA Analysis](#Post-CTS-STA-Analysis)
 - [Day-5 Final Steps in RTL to GDSII](#Day-5-Final-Steps-in-RTL-to-GDSII)    
-	- [ Power Distribution Network Generation](# Power-Distribution-Network-Generation)
+	- [ Power Distribution Network Generation](#Power-Distribution-Network-Generation)
 	- [Global and Detailed Routing](#Global-and-Detailed-Routing)
 	- [SPEF Extraction](#SPEF-Extraction)
 - [Acknowledgement](#acknowledgement)
@@ -617,9 +617,9 @@ After routing has been completed interconnect parasitics can be extracted to per
 
 
 # Acknowledgements
--Kunal Ghosh - Co-founder (VSD Corp. Pvt. Ltd)
--Nickson Jose - VSD VLSI Engineer
 
+* [Kunal Ghosh - Co-founder (VSD Corp. Pvt. Ltd)](https://github.com/kunalg123)
+* [Nickson Jose - VSD VLSI Engineer](https://github.com/nickson-jose)
 # Contact
--Mayur Pohane- mayur17pohane@gmail.com
+Mayur Pohane - mayur17pohane@gmail.com
 
