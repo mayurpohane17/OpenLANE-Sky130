@@ -7,51 +7,51 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 
 # Table of Contents
 - [About](#About)
-- [RTL-GDSII Flow](#RTL-GDSII Flow)
-- [Day-1 Opensource EDA, OpenLANE, Skywater130 PDK](#Day-1 Opensource EDA, OpenLANE, Skywater130 PDK)
-	- [Skywater PDK Files](#Skywater PDK Files)
- 	- [Invoking OpenLANE](#Invoking OpenLANE)
- 	- [Package Importing](#Package Importing)
- 	- [Design Folder](#tips-for-ip-design-using-sky130-technology)
- 	- [Design Folder Hierarchy](#Design Folder Hierarchy) 
-	- [Configuration Files](#Configuration Files)
-	- [Prepare Design](#Prepare Design)
+- [RTL-GDSII Flow](#RTL-GDSII-Flow)
+- [Day-1 Opensource EDA, OpenLANE, Skywater130 PDK](#Day-1-Opensource-EDA,-OpenLANE,-Skywater130-PDK)
+	- [Skywater PDK Files](#Skywater-PDK-Files)
+ 	- [Invoking OpenLANE](#Invoking-OpenLANE)
+ 	- [Package Importing](#Package-Importing)
+ 	- [Design Folder](#Design-Folder)
+ 	- [Design Folder Hierarchy](#Design-Folder-Hierarchy) 
+	- [Configuration Files](#Configuration-Files)
+	- [Prepare Design](#Prepare-Design)
  	- [Synthesis](#Synthesis)
-- [Day-2 Floorplanning and Standard Cells](#Day-2 Floorplanning and Standard Cells)
-	- [Aspect Ratio and Utilization Factor](#Aspect Ratio and Utilization Factor)
- 	- [Preplaced Cells](#Preplaced Cells)
- 	- [Decouping Capacitors](#Decouping Capacitors)
-  - [Power Planning](#Power Planning)
-  - [Pin Placement](#Pin Placement)
-  - [Floorplanning with OpenLANE](#Floorplanning with OpenLANE)
-  - [Viewing Floorplan in Magic](#Viewing Floorplan in Magic)
- 	- [Placement](#Placement)
-  - [Viewing Placement in Magic](#Viewing Placement in Magic)
- 	- [Standard Cell Design Flow](#Standard Cell Design Flow)
-  - [Standard Cell Characterization](#Standard Cell Characterization)
+- [Day-2 Floorplanning and Standard Cells](#Day-2-Floorplanning-and-Standard-Cells)
+	- [Aspect Ratio and Utilization Factor](#Aspect-Ratio-and-Utilization-Factor)
+	- [Preplaced Cells](#Preplaced-Cells)
+	- [Decouping Capacitors](#Decouping-Capacitors)
+	- [Power Planning](#Power-Planning)
+	- [Pin Placement](#Pin-Placement)
+	- [Floorplanning with OpenLANE](#Floorplanning-with-OpenLANE)
+	- [Viewing Floorplan in Magic](#Viewing-Floorplan-in-Magic)
+	- [Placement](#Placement)
+	- [Viewing Placement in Magic](#Viewing-Placement-in-Magic)
+	- [Standard Cell Design Flow](#Standard-Cell-Design-Flow)
+	- [Standard Cell Characterization](#Standard-Cell-Characterization)
   
-- [Day 3 - Design Library Cell](#Day 3 - Design Library Cell)
- 	- [Spice Simulations](#Spice Simulations)
-  - [Switching Threshold of a CMOS Inverter](#Switching Threshold of a CMOS Inverter)
-  - [16 Mask CMOS Process Steps](#16 Mask CMOS Process Steps)
-  - [Magic Layout View of Inverter Standard Cell](#Magic Layout View of Inverter Standard Cell)
-  - [Magic Key Features](#Magic Key Features)
-  - [Device Inference](#Device Inference)
-  - [DRC Errors](#DRC Errors)
-  - [PEX Extraction with Magic](#PEX Extraction with Magic)
-  - [Spice Wrapper for Simulation](#Spice Wrapper for Simulation)
-- [Day-4 Layout Timing Analysis and CTS](#Day-4 Layout Timing Analysis and CTS)
-  - [An Introduciton to LEF Files](#An Introduciton to LEF Files)
-  - [LEF Generation in Magic](#LEF Generation in Magic)
-  - [Including Custom Cells in OpenLANE](#Including Custom Cells in OpenLANE)
-  - [Fixing Slack Violations](#Fixing Slack Violations)
-  - [Clock Tree Synthesis](#SyntheClock Tree Synthesissis)
-  - [Viewing Post-CTS Netlist](#Viewing Post-CTS Netlist)
-  - [Post-CTS STA Analysis](#Post-CTS STA Analysis)
+- [Day 3 - Design Library Cell](#Day-3-Design-Library-Cell)
+	- [Spice Simulations](#Spice-Simulations)
+	- [Switching Threshold of a CMOS Inverter](#Switching-Threshold-of-a-CMOS-Inverter)
+	- [16 Mask CMOS Process Steps](#16-Mask-CMOS-Process-Steps)
+	- [Magic Layout View of Inverter Standard Cell](#Magic-Layout-View-of-Inverter-Standard-Cell)
+	- [Magic Key Features](#Magic-Key-Features)
+	- [Device Inference](#Device-Inference)
+	- [DRC Errors](#DRC-Errors)
+	- [PEX Extraction with Magic](#PEX-Extraction-with-Magic)
+	- [Spice Wrapper for Simulation](#Spice-Wrapper-for-Simulation)
+- [Day-4 Layout Timing Analysis and CTS](#Day-4-Layout-Timing-Analysis-and-CTS)
+	- [An Introduciton to LEF Files](#An-Introduciton-to-LEF-Files)
+	- [LEF Generation in Magic](#LEF Generation in Magic)
+	- [Including Custom Cells in OpenLANE](#Including Custom Cells in OpenLANE)
+	- [Fixing Slack Violations](#Fixing Slack Violations)
+	- [Clock Tree Synthesis](#SyntheClock Tree Synthesissis)
+	- [Viewing Post-CTS Netlist](#Viewing Post-CTS Netlist)
+	- [Post-CTS STA Analysis](#Post-CTS STA Analysis)
 - [Day 5 Final Steps in RTL to GDSII](#Day 5 Final Steps in RTL to GDSII)    
-  - [ Power Distribution Network Generation](# Power Distribution Network Generation)
-  - [Global and Detailed Routing](#Global and Detailed Routing)
-  - [SPEF Extraction](#SPEF Extraction)
+	- [ Power Distribution Network Generation](# Power Distribution Network Generation)
+	- [Global and Detailed Routing](#Global and Detailed Routing)
+	- [SPEF Extraction](#SPEF Extraction)
 - [Acknowledgement](#acknowledgement)
 - [Contact Information](#contact-information)
 
@@ -123,64 +123,64 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 
 ![](Images/day3_15.PNG)
 
-![](day4_10INVCELL.PNG)
+![](Images/day4_10INVCELL.PNG)
 
-![](day4_11Expanded.PNG)
+![](Images/day4_11Expanded.PNG)
 
-![](day4_12prestacxonf.PNG)
+![](Images/day4_12prestacxonf.PNG)
 
-![](day4_13 fanout setting.PNG)
+![](Images/day4_13 fanout setting.PNG)
 
-![](day4_14afterfanout slack.PNG)
+![](Images/day4_14afterfanout slack.PNG)
 
-![](day4_15the buffer was replaces.PNG)
+![](Images/day4_15the buffer was replaces.PNG)
 
-![](day4_16after changing buffers.PNG)
+![](Images/day4_16after changing buffers.PNG)
 
-![](day4_17after running again the floorplan and placement now cts.PNG)
+![](Images/day4_17after running again the floorplan and placement now cts.PNG)
 
-![](day4_18new cts file after running cts.PNG)
+![](Images/day4_18new cts file after running cts.PNG)
 
-![](day4_19 openroad inoke timing analysis.PNG)
+![](Images/day4_19 openroad inoke timing analysis.PNG)
 
-![](day4_1tracks_info.PNG)
+![](Images/day4_1tracks_info.PNG)
 
-![](day4_20read lef and def file and then writing the db file.PNG)
+![](Images/day4_20read lef and def file and then writing the db file.PNG)
 
-![](day4_21after thatverilog file and other files were read.PNG)
+![](Images/day4_21after thatverilog file and other files were read.PNG)
 
-![](day4_22 clocks and checks.PNG)
+![](Images/day4_22 clocks and checks.PNG)
 
-![](day4_23 post cts slack.PNG)
+![](Images/day4_23 post cts slack.PNG)
 
-![](day4_2after grid command.PNG)
+![](Images/day4_2after grid command.PNG)
 
-![](day4_3this shows that the input output are on intersection of tracks.PNG)
+![](Images/day4_3this shows that the input output are on intersection of tracks.PNG)
 
-![](day4_4how to save custom mag file.PNG)
+![](Images/day4_4how to save custom mag file.PNG)
 
-![](day4_5to extract lef file.PNG)
+![](Images/day4_5to extract lef file.PNG)
 
-![](day4_6changes in the config file.PNG)
+![](Images/day4_6changes in the config file.PNG)
 
-![](day4_7after prep add these two lines.PNG)
+![](Images/day4_7after prep add these two lines.PNG)
 
-![](day4_8aftersuccesful synthesis.PNG)
+![](Images/day4_8aftersuccesful synthesis.PNG)
 
-![](day4_9 magic output after reduniong slack.PNG)
+![](Images/day4_9 magic output after reduniong slack.PNG)
 
-![](day5_1commandfor power distri network.PNG)
+![](Images/day5_1commandfor power distri network.PNG)
 
-![](day5_2Routing command.PNG)
+![](Images/day5_2Routing command.PNG)
 
-![](day5_3check weather routing strategy is 0 or niot.PNG)
+![](Images/day5_3check weather routing strategy is 0 or niot.PNG)
 
-![](day5_4Routing completed.PNG)
+![](Images/day5_4Routing completed.PNG)
 
-![](day5_5routing specs.PNG)
+![](Images/day5_5routing specs.PNG)
 
-![](day5_6SPEFEXTRACTOR.PNG)
+![](Images/day5_6SPEFEXTRACTOR.PNG)
 
-![](day5_7newspeffilewas created.PNG)
+![](Images/day5_7newspeffilewas created.PNG)
 
-![](day5_8.PNG)
+![](Images/day5_8.PNG)
