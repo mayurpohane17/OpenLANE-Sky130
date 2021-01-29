@@ -123,63 +123,63 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 
 ![](Images/day3_15.PNG)
 
-![](Images/day4_1tracks_info.PNG)
+![](Images/day4_1.PNG)
 
-![](Images/day4_2after grid command.PNG)
+![](Images/day4_2.PNG)
 
-![](Images/day4_3this shows that the input output are on intersection of tracks.PNG)
+![](Images/day4_3.PNG)
 
-![](Images/day4_4how to save custom mag file.PNG)
+![](Images/day4_4.PNG)
 
-![](Images/day4_5to extract lef file.PNG)
+![](Images/day4_5.PNG)
 
-![](Images/day4_6changes in the config file.PNG)
+![](Images/day4_6.PNG)
 
-![](Images/day4_7after prep add these two lines.PNG)
+![](Images/day4_7.PNG)
 
-![](Images/day4_8aftersuccesful synthesis.PNG)
+![](Images/day4_8.PNG)
 
-![](Images/day4_9 magic output after reduniong slack.PNG)
+![](Images/day4_9.PNG)
 
-![](Images/day4_10INVCELL.PNG)
+![](Images/day4_10.PNG)
 
-![](Images/day4_11Expanded.PNG)
+![](Images/day4_11.PNG)
 
-![](Images/day4_12prestacxonf.PNG)
+![](Images/day4_12.PNG)
 
-![](Images/day4_13 fanout setting.PNG)
+![](Images/day4_13.PNG)
 
-![](Images/day4_14afterfanout slack.PNG)
+![](Images/day4_14.PNG)
 
-![](Images/day4_15the buffer was replaces.PNG)
+![](Images/day4_15.PNG)
 
-![](Images/day4_16after changing buffers.PNG)
+![](Images/day4_16.PNG)
 
-![](Images/day4_17after running again the floorplan and placement now cts.PNG)
+![](Images/day4_17.PNG)
 
-![](Images/day4_18new cts file after running cts.PNG)
+![](Images/day4_18.PNG)
 
-![](Images/day4_19 openroad inoke timing analysis.PNG)
+![](Images/day4_19.PNG)
 
-![](Images/day4_20read lef and def file and then writing the db file.PNG)
+![](Images/day4_20.PNG)
 
-![](Images/day4_21after thatverilog file and other files were read.PNG)
+![](Images/day4_21.PNG)
 
-![](Images/day4_22 clocks and checks.PNG)
+![](Images/day4_22.PNG)
 
-![](Images/day4_23 post cts slack.PNG)
+![](Images/day4_23.PNG)
 
-![](Images/day5_1commandfor power distri network.PNG)
+![](Images/day5_1.PNG)
 
-![](Images/day5_2Routing command.PNG)
+![](Images/day5_2.PNG)
 
-![](Images/day5_3check weather routing strategy is 0 or niot.PNG)
+![](Images/day5_3.PNG)
 
-![](Images/day5_4Routing completed.PNG)
+![](Images/day5_4.PNG)
 
-![](Images/day5_5routing specs.PNG)
+![](Images/day5_5.PNG)
 
-![](Images/day5_6SPEFEXTRACTOR.PNG)
+![](Images/day5_6.PNG)
 
 ![](Images/day5_7.PNG)
 
