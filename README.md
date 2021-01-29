@@ -30,7 +30,7 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 	- [Standard Cell Design Flow](#Standard-Cell-Design-Flow)
 	- [Standard Cell Characterization](#Standard-Cell-Characterization)
   
-- [Day 3 - Design Library Cell](#Day-3-Design-Library-Cell)
+- [Day-3 - Design Library Cell](#Day-3-Design-Library-Cell)
 	- [Spice Simulations](#Spice-Simulations)
 	- [Switching Threshold of a CMOS Inverter](#Switching-Threshold-of-a-CMOS-Inverter)
 	- [16 Mask CMOS Process Steps](#16-Mask-CMOS-Process-Steps)
@@ -42,16 +42,16 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 	- [Spice Wrapper for Simulation](#Spice-Wrapper-for-Simulation)
 - [Day-4 Layout Timing Analysis and CTS](#Day-4-Layout-Timing-Analysis-and-CTS)
 	- [An Introduciton to LEF Files](#An-Introduciton-to-LEF-Files)
-	- [LEF Generation in Magic](#LEF Generation in Magic)
-	- [Including Custom Cells in OpenLANE](#Including Custom Cells in OpenLANE)
-	- [Fixing Slack Violations](#Fixing Slack Violations)
-	- [Clock Tree Synthesis](#SyntheClock Tree Synthesissis)
-	- [Viewing Post-CTS Netlist](#Viewing Post-CTS Netlist)
-	- [Post-CTS STA Analysis](#Post-CTS STA Analysis)
-- [Day 5 Final Steps in RTL to GDSII](#Day 5 Final Steps in RTL to GDSII)    
-	- [ Power Distribution Network Generation](# Power Distribution Network Generation)
-	- [Global and Detailed Routing](#Global and Detailed Routing)
-	- [SPEF Extraction](#SPEF Extraction)
+	- [LEF Generation in Magic](#LEF-Generation-in-Magic)
+	- [Including Custom Cells in OpenLANE](#Including-Custom-Cells-in-OpenLANE)
+	- [Fixing Slack Violations](#Fixing-Slack-Violations)
+	- [Clock Tree Synthesis](#SyntheClock-Tree-Synthesissis)
+	- [Viewing Post-CTS Netlist](#Viewing-Post-CTS-Netlist)
+	- [Post-CTS STA Analysis](#Post-CTS-STA-Analysis)
+- [Day-5 Final Steps in RTL to GDSII](#Day-5-Final-Steps-in-RTL-to-GDSII)    
+	- [ Power Distribution Network Generation](# Power-Distribution-Network-Generation)
+	- [Global and Detailed Routing](#Global-and-Detailed-Routing)
+	- [SPEF Extraction](#SPEF-Extraction)
 - [Acknowledgement](#acknowledgement)
 - [Contact Information](#contact-information)
 
@@ -123,6 +123,24 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 
 ![](Images/day3_15.PNG)
 
+![](Images/day4_1tracks_info.PNG)
+
+![](Images/day4_2after grid command.PNG)
+
+![](Images/day4_3this shows that the input output are on intersection of tracks.PNG)
+
+![](Images/day4_4how to save custom mag file.PNG)
+
+![](Images/day4_5to extract lef file.PNG)
+
+![](Images/day4_6changes in the config file.PNG)
+
+![](Images/day4_7after prep add these two lines.PNG)
+
+![](Images/day4_8aftersuccesful synthesis.PNG)
+
+![](Images/day4_9 magic output after reduniong slack.PNG)
+
 ![](Images/day4_10INVCELL.PNG)
 
 ![](Images/day4_11Expanded.PNG)
@@ -143,8 +161,6 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 
 ![](Images/day4_19 openroad inoke timing analysis.PNG)
 
-![](Images/day4_1tracks_info.PNG)
-
 ![](Images/day4_20read lef and def file and then writing the db file.PNG)
 
 ![](Images/day4_21after thatverilog file and other files were read.PNG)
@@ -152,22 +168,6 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 ![](Images/day4_22 clocks and checks.PNG)
 
 ![](Images/day4_23 post cts slack.PNG)
-
-![](Images/day4_2after grid command.PNG)
-
-![](Images/day4_3this shows that the input output are on intersection of tracks.PNG)
-
-![](Images/day4_4how to save custom mag file.PNG)
-
-![](Images/day4_5to extract lef file.PNG)
-
-![](Images/day4_6changes in the config file.PNG)
-
-![](Images/day4_7after prep add these two lines.PNG)
-
-![](Images/day4_8aftersuccesful synthesis.PNG)
-
-![](Images/day4_9 magic output after reduniong slack.PNG)
 
 ![](Images/day5_1commandfor power distri network.PNG)
 
@@ -181,6 +181,6 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 
 ![](Images/day5_6SPEFEXTRACTOR.PNG)
 
-![](Images/day5_7newspeffilewas created.PNG)
+![](Images/day5_7.PNG)
 
 ![](Images/day5_8.PNG)
