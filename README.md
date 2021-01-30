@@ -301,37 +301,82 @@ Propogation Delay - This is defined as the time difference between the points wh
 
 
 
-## Day 4 Layout Timing Analysis and CTS
+## Day 4 Timing Analysis and CTS
 
-Tracks File
+### An Introduction to LEF Files
+The LEF file is the abstract view of cells. It gives idea about PR boundary, pin position and metal layer information of a cell. 
+
+Technology LEF - Contains layer information, via information, and restricted DRC rules
+
+Cell LEF - Abstract information of standard cells
+
+Guidelines for making Standard Cell set:
+
+	1.Input and output port must lie on interconnect of vertical and horizontal tracks. 
+	2.Width of standard cell should be odd multiple of track horizontal pitch 
+	3.Height of standard cell should be odd multiple of track vertical pitch.
+
+Tracks File:
 
 ![](Images/day4_1.PNG)
 
-Grids according to the track def
-
+Grids according to the track defination are reflected in the below image.To display grid use `grid 0.46um 0.34um 0.23um 0.17um`. These values are taken from the track file.
+  
 ![](Images/day4_2.PNG)
 
-Intersection is taking place in the defined metal area
+All the criteria of the standard cell set are meet here.
 
 ![](Images/day4_3.PNG)
  
- 
+Save the mag file as shown below.
  
 ![](Images/day4_4.PNG)
 
+Magic allows to generate cell LEF. To generate the cell LEF file from Magic perform:
+
 ![](Images/day4_5.PNG)
+
+### Including Custom Cells in OpenLANE
+Now we will include the standard cell (inverter) which we created in the above steps in the picorv32a dsesign.
+
+To do that, we make some changes in the config.tcl file.
+Here's how the config.tcl file looks finally :-
 
 ![](Images/day4_6.PNG)
 
+Now we will again run the `./flow.tcl -interactive` command and will include the package `package require openlane 0.9` and prepare the design using `prep -design <design_name> -tag <tag_name> -overwrite` Here we will overwrite the previous files with the help of `-overwrite`.
+
+Additional statements to include extra LEF Files:
+
+    set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+    add_lefs -src $lefs
+    
+After adding additional lef files run synthesis `run_synthesis`.
+  
 ![](Images/day4_7.PNG)
+
+Once the synthesis is completed, Check tns and wns values, it shows the slack violations.
 
 ![](Images/day4_8.PNG)
 
+Run Floorplan, Placement and invoke the magic.Use below commands.
+
+      % run_floorplan
+      % run_synthesis
+      % magic -T <magic tech file> lef read <lef file> def read <def file>
+
 ![](Images/day4_9.PNG)
+
+Upon zooming into the design, we can see our standard cell.
 
 ![](Images/day4_10.PNG)
 
+With the help of `expand` command you can see the layout.
+
 ![](Images/day4_11.PNG)
+
+### Fixing Slack Violations
+Upon running synthesis, it can be seen that the setup and hold slacks are both negative. This indicates Violation.
 
 ![](Images/day4_12.PNG)
 
@@ -343,17 +388,50 @@ Intersection is taking place in the defined metal area
 
 ![](Images/day4_16.PNG)
 
+### Clock Tree Synthesis
+After running floorplan and placement in OpenLANE, now we will add the clock tree. Two main concerns with generation of the clock tree are:
+
+Clock skew - Difference in arrival times of the clock for sequential elements across the design
+
+Delta delay - Skew introduced through capacitive coupling of the clock tree nets
+
+To run clock tree synthesis (CTS) in OpenLANE use `run_cts`.
+
 ![](Images/day4_17.PNG)
+
+A new synthesis file will be genearted in the results synthesis folder.
 
 ![](Images/day4_18.PNG)
 
+### OpenROAD
+In OpenROAD the timing analysis is done by creating a .db file. This database file is created from the post-cts LEF and DEF files. Invoke OpenROAD using `openroad` command.
+
 ![](Images/day4_19.PNG)
+
+Execute the following commands for timing analysis:-
+
+	% write_db pico_cts.db
+	% read_db pico_cts.db
+	% read_lef <Location_of_LEF_file>
+	% read_def <Location_of_DEF_file> 
+	% read_verilog <Location_of_verilog_file> 
+	% read_liberty $::env(LIB_SYNTH_COMPLETE)
+	% link_design <design_name> 
+	% read_sdc <Location_of_sdc_file>
+	% set_propagated_clock [all_clocks]
+	% report_checks -path_delay min_max -fields {slew trans net cap input_pin} -format full_clock_expanded -digits 4
+	
+Below images are the implementation of above commands.
+
+
 
 ![](Images/day4_20.PNG)
 
 ![](Images/day4_21.PNG)
 
 ![](Images/day4_22.PNG)
+
+Here we can see that now the timing requirements are meet.
 
 ![](Images/day4_23.PNG)
 
