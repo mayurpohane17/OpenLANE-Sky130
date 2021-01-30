@@ -286,14 +286,14 @@ To run the simulation with ngspice, invoke the ngspice tool with the spice file 
 
 The above plot can be used to compute the rise time, fall time and propagation delay. Calculating the values of these parameters is called as characterization of the cell. They are:-
 
-Rise Time - This is defined as the time taken for the signal to go from 20% to 80%. It was found to be 0.04238 ns.
-![](Images/day3_10.PNG)  ![](Images/day3_13.PNG)
+Rise Time - This is defined as the time taken for the signal to go from 20% to 80%. It was found to be 0.0637 ns.
+![](Images/day3_10.PNG)   ![](Images/day3_11.PNG) 
 
-Fall Time -This is defined as the time taken for the signal to go from 80% to 20%.  It was found to be 0.0278 ns
+Fall Time -This is defined as the time taken for the signal to go from 80% to 20%.  It was found to be 0.04237 ns
 
-![](Images/day3_11.PNG) ![](Images/day3_12.PNG)
+ ![](Images/day3_12.PNG)  ![](Images/day3_13.PNG)
 
-Propogation Delay - This is defined as the time difference between the points where the input and output are at 50% of their magnitude. It's experimentally found to be 0.03357 ns
+Propogation Delay - This is defined as the time difference between the points where the input and output are at 50% of their magnitude. It's experimentally found to be 0.027 ns
 
 ![](Images/day3_14.PNG)
 
