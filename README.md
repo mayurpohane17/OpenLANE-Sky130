@@ -101,24 +101,24 @@ These are the contents of the OpenLANE flow Directory.
 
 ![](Images/day1_2.png)
 
-Now to invoke the tool type `./flow.tcl` and to run it in the interactive mode type `./flow.tcl -interactive`.
+Now to invoke the tool type `$ ./flow.tcl` and to run it in the interactive mode type `$ ./flow.tcl -interactive`.
 
 ![](Images/day1_3.png)
 
 
 ### Package Importing
-Different software dependencies are required to run OpenLANE flow and to import these into the OpenLANE tool we need to run `package require openlane 0.9`
+Different software dependencies are required to run OpenLANE flow and to import these into the OpenLANE tool we need to run `% package require openlane 0.9`
  
 ![](Images/day1_4.png)
 
 ### Prepare Design
-Prep is used to make file structure for our design. Use `prep -design <design_name>`. here design_name is the name of our design i.e. "picorv32a".
-And to save it into a custom named folder use `prep -design <design_name> -tag <foldername>`.
+Prep is used to make file structure for our design. Use `% prep -design <design_name>`. here design_name is the name of our design i.e. "picorv32a".
+And to save it into a custom named folder use `% prep -design <design_name> -tag <foldername>`.
 Also the merging of Cell lef and Technology lef takes place in the preperation step and the merged.lef file is generated.
 ![](Images/day1_5.png)
 
 ### Synthesis-
-To run synthesis use `run_synthesis`.
+To run synthesis use `% run_synthesis`.
 
 ![](Images/day1_6.PNG)
 
@@ -159,7 +159,7 @@ Pin placement is an essential part of floorplanning to minimize buffering and im
 
 ### Floorplanning with OpenLANE
 Floorplanning is basically the arrangement of logical blocks (i.e. multiplexer, AND, OR gates, buffers) on silicon chip.
-To run floorplan in OpenLANE use `run_floorplan`.
+To run floorplan in OpenLANE use `% run_floorplan`.
 
 ![](Images/day2_1.PNG)
 
@@ -180,7 +180,7 @@ For veiwing the floorplan in Magic we require the input files which are:
 		
 The command to invoke the Magic Tools is 
 
-                magic -T <magic tech file> lef read <lef file> def read <def file>
+                $ magic -T <magic tech file> lef read <lef file> def read <def file>
 		
 ![](Images/day2_8.png)
 
@@ -194,7 +194,7 @@ Global Placement - Optimized but not legal placement. Optimization works to redu
 
 Detailed Placement - Legalizes placement of cells into standard cell rows while adhering to global placement
 
-To run placement in OpenLANE use `run_placement`.
+To run placement in OpenLANE use `% run_placement`.
 
 ![](Images/day2_6.png)
 
@@ -205,7 +205,7 @@ For placement to converge the overflow value needs to be converging to 0. At the
 ### Placement in Magic
 To view placement in Magic go to the placement directory in reults and use
 
-     magic -T <magic tech file> lef read <lef file> def read <def file>
+     $ magic -T <magic tech file> lef read <lef file> def read <def file>
 
 ![](Images/day2_10.png)
 
@@ -237,7 +237,7 @@ Characterization consist of following steps:
 ### Git Clonning Copying Tech File
 The nickson-jose github repo titled `vsdstdcelldesign` was cloned to the local system using the following command 
     
-     git clone https://github.com/nickson-jose/vsdstdcelldesign.git
+     $ git clone https://github.com/nickson-jose/vsdstdcelldesign.git
 
 ![](Images/day3_1.PNG)
 
@@ -253,7 +253,7 @@ Since we are using Magic, the tech file is required, (here sky130A.tech), which 
 
 To invoke the magic use 
     
-     magic -T sky130A.tech sky130_inv.mag &
+     $ magic -T sky130A.tech sky130_inv.mag &
      
 Magic output
 
@@ -263,10 +263,10 @@ Magic output
 
 To extract the Spice simulations file use these following commands
   	
-	%extract all
-	%ext2spice cthresh 0 rthresh 0
-	&ext2spice
-These three commands will generate the `spice` file and `.ext` file. and it is reflected in the vsd directory.
+	% extract all
+	% ext2spice cthresh 0 rthresh 0
+	% ext2spice
+These three commands will generate the `.spice` file and `.ext` file. and it is reflected in the vsd directory.
 
 ![](Images/day3_6.PNG)
 
@@ -284,7 +284,7 @@ To run the simulation with ngspice, invoke the ngspice tool with the spice file 
 
  To geneate Output Waveform of the Inverter use following command in ngspice.
    
-    plot y vs time a
+    -> plot y vs time a
 
 ![](Images/day3_9.PNG)
 
@@ -324,7 +324,7 @@ Tracks File:
 
 ![](Images/day4_1.PNG)
 
-Grids according to the track defination are reflected in the below image.To display grid use `grid 0.46um 0.34um 0.23um 0.17um`. These values are taken from the track file.
+Grids according to the track defination are reflected in the below image.To display grid use `% grid 0.46um 0.34um 0.23um 0.17um`. These values are taken from the track file.
   
 ![](Images/day4_2.PNG)
 
@@ -338,7 +338,7 @@ Save the mag file as shown below.
 
 ### LEF Generation
 
-Magic allows to generate cell LEF. To generate the cell LEF file from Magic perform `lef write`.
+Magic allows to generate cell LEF. To generate the cell LEF file from Magic perform `% lef write`.
 
 ![](Images/day4_5.PNG)
 
@@ -350,14 +350,14 @@ Here's how the config.tcl file looks finally :-
 
 ![](Images/day4_6.PNG)
 
-Now we will again run the `./flow.tcl -interactive` command and will include the package `package require openlane 0.9` and prepare the design using `prep -design <design_name> -tag <tag_name> -overwrite` Here we will overwrite the previous files with the help of `-overwrite`.
+Now we will again run the `$ ./flow.tcl -interactive` command and will include the package `% package require openlane 0.9` and prepare the design using `% prep -design <design_name> -tag <tag_name> -overwrite` Here we will overwrite the previous files with the help of `-overwrite`.
 
 Additional statements to include extra LEF Files:
 
-    set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
-    add_lefs -src $lefs
+    % set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+    % add_lefs -src $lefs
     
-After adding additional lef files run synthesis `run_synthesis`.
+After adding additional lef files run synthesis `% run_synthesis`.
   
 ![](Images/day4_7.PNG)
 
@@ -369,7 +369,7 @@ Run Floorplan, Placement and invoke the magic.Use below commands.
 
       % run_floorplan
       % run_synthesis
-      % magic -T <magic tech file> lef read <lef file> def read <def file>
+      $ magic -T <magic tech file> lef read <lef file> def read <def file>
 
 ![](Images/day4_9.PNG)
 
@@ -377,13 +377,13 @@ Upon zooming into the design, we can see our standard cell.
 
 ![](Images/day4_10.PNG)
 
-With the help of `expand` command you can see the layout.
+With the help of `% expand` command you can see the layout.
 
 ![](Images/day4_11.PNG)
 
 ### Fixing Slack Violations
 Upon running synthesis, it can be seen that the setup and hold slacks are both negative. This indicates Violation.
-`pre_sta.conf` file was created.And to run the sta use `sta pre_sta.conf`.
+`pre_sta.conf` file was created.And to run the sta use `$ sta pre_sta.conf`.
 
 ![](Images/day4_12.PNG)
 
@@ -398,7 +398,7 @@ Slack after updated fanout.
 ### Upsizing Buffers
 
 Fanout updation was not that effeftive so now we resize the bufeers to reduce the slack.But upsizing the buffers also increases the area of chip.
-This modification can be done as follows:- `replace_cell _<net_number>_ <name_of_buffer>`.
+This modification can be done as follows:- `% replace_cell _<net_number>_ <name_of_buffer>`.
 
 ![](Images/day4_15.PNG)
 
@@ -414,7 +414,7 @@ Clock skew - Difference in arrival times of the clock for sequential elements ac
 
 Delta delay - Skew introduced through capacitive coupling of the clock tree nets
 
-To run clock tree synthesis (CTS) in OpenLANE use `run_cts`.
+To run clock tree synthesis (CTS) in OpenLANE use `% run_cts`.
 
 ![](Images/day4_17.PNG)
 
@@ -423,7 +423,7 @@ A new synthesis file will be genearted in the results synthesis folder.
 ![](Images/day4_18.PNG)
 
 ### OpenROAD
-In OpenROAD the timing analysis is done by creating a .db file. This database file is created from the post-cts LEF and DEF files. Invoke OpenROAD using `openroad` command.
+In OpenROAD the timing analysis is done by creating a .db file. This database file is created from the post-cts LEF and DEF files. Invoke OpenROAD using `% openroad` command.
 
 ![](Images/day4_19.PNG)
 
@@ -465,7 +465,7 @@ The PDN feature within OpenLANE will create:
 	3.Power straps to bring power into the center of the chip
 	4.Power rails for the standard cells
 	
-To generate the PDN in OpenLANE use `gen_pdn`
+To generate the PDN in OpenLANE use `% gen_pdn`
 
 ![](Images/day5_1.PNG)
 
@@ -476,7 +476,7 @@ Global Routing - Routing guides are generated for interconnects on our netlist d
 
 Detailed Routing - Metal traces are iteratively laid across the routing guides to physically implement the routing guides.
 
-To run routing in OpenLANE use `run_routing`.
+To run routing in OpenLANE use `% run_routing`.
 
 ![](Images/day5_2.PNG)
 
