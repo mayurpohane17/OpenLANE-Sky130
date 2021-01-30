@@ -16,17 +16,16 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 	- [Prepare Design](#Prepare-Design)
  	- [Synthesis](#Synthesis)
 	- [Configuration Files](#Configuration-Files)
-- [Day-2 Floorplanning and Standard Cells](#Day-2-Floorplanning-and-Standard-Cells)
+- [Day-2 Floorplanning, Placement and Characterization](#Day-2-Floorplanning-Placement-and-Characterization)
 	- [Aspect Ratio and Utilization Factor](#Aspect-Ratio-and-Utilization-Factor)
 	- [Preplaced Cells](#Preplaced-Cells)
 	- [Decouping Capacitors](#Decouping-Capacitors)
 	- [Power Planning](#Power-Planning)
 	- [Pin Placement](#Pin-Placement)
 	- [Floorplanning with OpenLANE](#Floorplanning-with-OpenLANE)
-	- [Viewing Floorplan in Magic](#Viewing-Floorplan-in-Magic)
+	- [Floorplan in Magic](#Floorplan-in-Magic)
 	- [Placement](#Placement)
-	- [Viewing Placement in Magic](#Viewing-Placement-in-Magic)
-	- [Standard Cell Design Flow](#Standard-Cell-Design-Flow)
+	- [Placement in Magic](#Viewing-Placement-in-Magic)
 	- [Standard Cell Characterization](#Standard-Cell-Characterization)
   
 - [Day-3 - Design Library Cell](#Day-3-Design-Library-Cell)
@@ -132,7 +131,7 @@ These file contains the Design specs that are used to configure the parameters a
 
 
 
-## Day-2-> Floorplanning, Placement and Characterization
+## Day-2-> Floorplanning and Placement
 
 ### Aspect Ratio and Utilization Factor
 A chip consists of two parts, core and die. A core is the section of the chip where the fundamental logic of the design is placed. A die, which consists of core, is small semiconductor material specimen on which the fundamental circuit is fabricated
@@ -190,7 +189,7 @@ The command to invoke the Magic Tools is
 After Floorplanning, the next step is Placement. Placement is the process of finding a suitable physical location for each cell in the block.
 Placement does not just place the standard cell available in the synthesized netlist, it also optimized the design
 OpenLANE does placement in two stages:
-
+////////
 Global Placement - Optimized but not legal placement. Optimization works to reduce wirelength by reducing half parameter wirelength.
 Detailed Placement - Legalizes placement of cells into standard cell rows while adhering to global placement
 
@@ -220,7 +219,7 @@ Cell Design consist of following steps-
 
 Standard Cell Libraries consist of cells with different functionality/drive strengths. These cells need to be characterized by liberty files to be used by synthesis tools to determine optimal circuit arrangement.
 Characterization consist of following steps:
-
+/////////////
 1.Read Model File.
 2.Extract Spice netlist.
 3.Define behavior of Buffer.
@@ -231,23 +230,39 @@ Characterization consist of following steps:
 8.Provide Simulation commands.
 
 
-## Day 3 Design Library Cell
-Git Clonning the vsd folder
+
+## Day 3 Design Library Cell and Characterization using Ngspice
+### Git Clonning Copying Tech File
+The nickson-jose github repo titled `vsdstdcelldesign` was cloned to the local system using the following command 
+    
+     git clone https://github.com/nickson-jose/vsdstdcelldesign.git
 
 ![](Images/day3_1.PNG)
 
-Contains of the VSD folder
+Contains of the VSD directory are:
 
 ![](Images/day3_3.PNG)
 
-To invoke the magic 
+Since we are using Magic, the tech file is required, (here sky130A.tech), which is present in the openlane_working_dir/pdks/sky130A/libs.tech/magic folder, so we need to copy it to the vsd directory. Use `cp sky130A.tech /Desktop/work/tools/openlane_working_dir/openLANE_flow/vsdstdcelldesign`
 
 ![](Images/day3_4.PNG)
+
+To invoke the magic use 
+    
+     magic -T sky130A.tech sky130_inv.mag &
+     
 Magic output
 
 ![](Images/day3_5.PNG)
 
-To extract the Spice simulations
+### Extracting Spice File
+
+To extract the Spice simulations file use these following commands
+  	
+	%extract all
+	%ext2spice cthresh 0 rthresh 0
+	&ext2spice
+These three commands will generate the `spice` file and `.ext` file. and it is reflected in the vsd directory.
 
 ![](Images/day3_6.PNG)
 
@@ -255,27 +270,32 @@ Contains of Spice File
 
 ![](Images/day3_7.PNG)
 
+To run the simulation with ngspice, invoke the ngspice tool with the spice file as input:
+ 
+    $ ngspice sky130_inv.spice
+ 
+[](Images/day3_8.PNG)
 
-
-![](Images/day3_8.PNG)
-
-Output Waveform of the Inverter
+ To geneate Output Waveform of the Inverter use following command in ngspice.
+   
+    plot y vs time a
 
 ![](Images/day3_9.PNG)
 
-These are the coordinates that are used to calculate the rise fall transaction time
+### Characterization of Cell 
 
-![](Images/day3_10.PNG)
-![](Images/day3_13.PNG)
+The above plot can be used to compute the rise time, fall time and propagation delay. Calculating the values of these parameters is called as characterization of the cell. They are:-
 
-![](Images/day3_11.PNG)
-![](Images/day3_12.PNG)
+Rise Time - This is defined as the time taken for the signal to go from 20% to 80%. It was found to be 0.04238 ns.
+![](Images/day3_10.PNG)  ![](Images/day3_13.PNG)
 
+Fall Time -This is defined as the time taken for the signal to go from 80% to 20%.  It was found to be 0.0278 ns
 
+![](Images/day3_11.PNG) ![](Images/day3_12.PNG)
+
+Propogation Delay - This is defined as the time difference between the points where the input and output are at 50% of their magnitude. It's experimentally found to be 0.03357 ns
 
 ![](Images/day3_14.PNG)
-
-![](Images/day3_15.PNG)
 
 
 ## Day 4 Layout Timing Analysis and CTS
