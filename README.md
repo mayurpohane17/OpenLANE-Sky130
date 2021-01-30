@@ -29,14 +29,14 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 	- [Placement in Magic](#Viewing-Placement-in-Magic)
 	- [Standard Cell Characterization](#Standard-Cell-Characterization)
   
-- [Day-3 - Design Library Cell and Characterization using Ngspice](#Day-3-Design-Library-Cell-and-Characterization-using-Ngspice)
+- [Day-3 Design Library Cell and Characterization using Ngspice](#Day-3-Design-Library-Cell-and-Characterization-using-Ngspice)
 	- [Git Clonning and Copying Tech File](#Git-Clonning-and-Copying-Tech-File)
 	- [Standard Cell in Magic](#Standard-cell-in-Magic)
 	- [Extracting Spice File](#Extracting-Spice-File)
 	- [Ngspice Simulation](#Ngspice-Simulation)
 	- [Characterization of Cell](#Characterization-of-Cell)
 	
-- [Day-4 Layout Timing Analysis and CTS](#Day-4-Layout-Timing-Analysis-and-CTS)
+- [Day-4 Timing Analysis and CTS](#Day-4-Timing-Analysis-and-CTS)
 	- [Introduciton to LEF Files](#Introduciton-to-LEF-Files)
 	- [LEF Generation](#LEF-Generation)
 	- [Including Custom Cells in OpenLANE](#Including-Custom-Cells-in-OpenLANE)
