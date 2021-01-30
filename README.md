@@ -377,16 +377,28 @@ With the help of `expand` command you can see the layout.
 
 ### Fixing Slack Violations
 Upon running synthesis, it can be seen that the setup and hold slacks are both negative. This indicates Violation.
+`pre_sta.conf` file was created.And to run the sta use `sta pre_sta.conf`.
 
 ![](Images/day4_12.PNG)
 
+To reduce slack, fanout is reduced to 4
+
 ![](Images/day4_13.PNG)
+
+Slack after updated fanout.
 
 ![](Images/day4_14.PNG)
 
+### Upsizing the Buffers
+
+Fanout updation was not that effeftive so now we resize the bufeers to reduce the slack.But upsizing the buffers also increases the area of chip.
+This modification can be done as follows:- `replace_cell _<net_number>_ <name_of_buffer>`.
 ![](Images/day4_15.PNG)
 
+Slack after updating the buffer size.
+
 ![](Images/day4_16.PNG)
+
 
 ### Clock Tree Synthesis
 After running floorplan and placement in OpenLANE, now we will add the clock tree. Two main concerns with generation of the clock tree are:
@@ -435,7 +447,7 @@ Here we can see that now the timing requirements are meet.
 
 
 
-## Day 5 Final Steps in RTL to GDSII
+## Day-5-> Routing and SPEF Extraction
 
 ### Power Distribution Network
 
@@ -486,7 +498,7 @@ The SPEF file is then written into the routing directory under results as can be
 ![](Images/day5_7.PNG)
 
 ### Modified Netlists
-At certain stages, the original netlist we worked with has been modified and added subsequently to the synthesis folder under results because each stage is responsible for performing certain actions that can optimise the design and keep the physcial design flow smooth and running.
+At diffrent stages, the original netlist we worked were modified and added subsequently to the synthesis folder because each stage is responsible for performing certain actions which optimises the design and keep the physcial design flow smooth and running.
 
 ![](Images/day5_8.PNG)
 
