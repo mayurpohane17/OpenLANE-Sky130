@@ -132,14 +132,39 @@ These file contains the Design specs that are used to configure the parameters a
 
 
 
-## Day-2-> Floorplanning and Placement-
+## Day-2-> Floorplanning, Placement and Characterization
+
+### Aspect Ratio and Utilization Factor
+A chip consists of two parts, core and die. A core is the section of the chip where the fundamental logic of the design is placed. A die, which consists of core, is small semiconductor material specimen on which the fundamental circuit is fabricated
+#### Utilization Factor
+It is defined as the ratio of area occupied by the netlist to the total area of the core.If the utilization factor is 1,it means the core is completely occupied.
+
+      Utilization Factor = Area occupied by netlist / Total area of core
+      
+#### Aspect Ratio
+It is defined as the ratio of the height of the core to width of the core. If the aspect ratio is 1, it means the core is square.
+
+      Aspect Ratio = Height / Width
+
+### Preplaced Cells
+During placement and routing, most of the placement tools, place/move logic cells based on floorplan specifications. Some of the important or critical cell's locations has to be pre-defined before actual placement and routing stages. The critical cells are mostly the cells related to clocks that are clock buffers, clock mux, etc. and also few other cells such as RAM's, ROM,s etc. Since, these cells are placed in to core before placement and routing stage, they are called 'preplaced cells'.
+
+### Decoupling Capacitors
+A decoupling capacitor is a capacitor, which is used decouple the critical cells from main power supply, in order to protect the cells from the disturbance occuring in the power distribution lines and source. The purpose of using decoupling capacitors is to deliver current to the gates during switching. The placement of de-coupling capacitors surrounding the pre-placed cells improves the reliability and efficiency of the chip.
+
+### Power Planning
+Power planning is essential to lower the noise and also to save the signal from getting faded in digital circuits attributed to voltage drop and ground bounce. Coupling capacitance is formed between the interconnect wires. When a transition occurs on a net, charge associated with coupling capacitors may be dumped to ground. Charge dumps to HIGH/LOW must happen efficiently in the event of a transition, negligence of which leads to accumulation of unwanted charges at the tap, forcing the ground line to behave as a large resistor, lowering the noise margin. The solution to this problem is a robust PDN with many power strap taps which are required to lower the resistance.
+
+### Pin Placement
+Pin placement is an essential part of floorplanning to minimize buffering and improve power consumption and timing delays. In pin placement the connectivity information of the HDL netlist is used to determine the I/O placements. Bigger the size of the I/O pin, the lower is the resistance and because of that the clock pins are bigger in size as we need least resistance.
 
 ### Floorplanning with OpenLANE
-To run floorplan in OpenLANE:
+Floorplanning is basically the arrangement of logical blocks (i.e. multiplexer, AND, OR gates, buffers) on silicon chip.
+To run floorplan in OpenLANE use `run_floorplan`.
 
 ![](Images/day2_1.PNG)
 
-As with all other stages, the floorplanning will be run according to configuration settings in the design specific config.tcl file. The output the the floorplanning phase is a DEF file which describes core area and placement of standard cell SITES:
+The floorplanning run according to configuration settings in the design specific config.tcl file. The output the the floorplanning phase is a DEF file which describes core area and placement of standard cell SITES:
 
 ![](Images/day2_7.png)
  
@@ -147,35 +172,63 @@ The Core area and Die area along with the Design analysis is shown below.
 
 ![](Images/day2_5.png)
 
-### Viewing Floorplan in Magic
-To view our floorplan in Magic we need to provide three files as input:
+### Floorplan in Magic
+For veiwing the floorplan in Magic we require the input files which are:
 
-Magic technology file (sky130A.tech)
-Def file of floorplan
-Merged LEF file
+		1.Magic technology file (sky130A.tech)
+		2.Def file of floorplan
+		3.Merged LEF file
+		
+The command to invoke the Magic Tools is 
 
+                magic -T <magic tech file> lef read <lef file> def read <def file>
+		
 ![](Images/day2_8.png)
 
 
 ### Placement
-The next step in the Digital ASIC design flow after floorplanning is placement. The synthesized netlist has been mapped to standard cells and floorplanning phase has determined the standard cells rows, enabling placement. OpenLANE does placement in two stages:
+After Floorplanning, the next step is Placement. Placement is the process of finding a suitable physical location for each cell in the block.
+Placement does not just place the standard cell available in the synthesized netlist, it also optimized the design
+OpenLANE does placement in two stages:
 
-Global Placement - Optimized but not legal placement. Optimization works to reduce wirelength by reducing half parameter wirelength
+Global Placement - Optimized but not legal placement. Optimization works to reduce wirelength by reducing half parameter wirelength.
 Detailed Placement - Legalizes placement of cells into standard cell rows while adhering to global placement
 
-To do placement in OpenLANE:
+To run placement in OpenLANE use `run_placement`.
 
 ![](Images/day2_6.png)
 
-For placement to converge the overflow value needs to be converging to 0. At the end of placement cell legalization will be reported:
+For placement to converge the overflow value needs to be converging to 0. At the end of placement cell legalization are reported:
 
 ![](Images/day2_9.png)
 
 ### Viewing Placement in Magic
-To view placement in Magic the command mirrors viewing floorplanning:
+To view placement in Magic go to the placement directory in reults and use
+
+     magic -T <magic tech file> lef read <lef file> def read <def file>
 
 ![](Images/day2_10.png)
 
+### Standard Cell Characterization
+Cell Design consist of following steps-
+
+1. Inputs - PDKs (Process design kits) consist of DRC & LVS rules, SPICE models, library & user-defined specs.
+
+2. Design Steps - Design step include Circuit Design, Layout Design, Characterization.GUNA software is used for characterization. The characterization can be classified as Timing, Power and Noise characterization.
+
+3. Outputs - Outputs of the Design are CDL (Circuit Description Language), GDSII, LEF, extracted Spice netlist (.cir), timing, noise, power.libs, function.
+
+Standard Cell Libraries consist of cells with different functionality/drive strengths. These cells need to be characterized by liberty files to be used by synthesis tools to determine optimal circuit arrangement.
+Characterization consist of following steps:
+
+1.Read Model File.
+2.Extract Spice netlist.
+3.Define behavior of Buffer.
+4.Read subcircuit.
+5.Attach necessary power sources.
+6.Apply Stimulas.
+7.Provide necessary Capacitance.
+8.Provide Simulation commands.
 
 
 ## Day 3 Design Library Cell
