@@ -16,7 +16,7 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 	- [Prepare Design](#Prepare-Design)
  	- [Synthesis](#Synthesis)
 	- [Configuration Files](#Configuration-Files)
-- [Day-2 Floorplanning, Placement and Characterization](#Day-2-Floorplanning-Placement-and-Characterization)
+- [Day-2 Floorplanning and Placement](#Day-2-Floorplanning-and-Placement)
 	- [Aspect Ratio and Utilization Factor](#Aspect-Ratio-and-Utilization-Factor)
 	- [Preplaced Cells](#Preplaced-Cells)
 	- [Decouping Capacitors](#Decouping-Capacitors)
@@ -29,15 +29,10 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 	- [Standard Cell Characterization](#Standard-Cell-Characterization)
   
 - [Day-3 - Design Library Cell](#Day-3-Design-Library-Cell)
-	- [Spice Simulations](#Spice-Simulations)
-	- [Switching Threshold of a CMOS Inverter](#Switching-Threshold-of-a-CMOS-Inverter)
-	- [16 Mask CMOS Process Steps](#16-Mask-CMOS-Process-Steps)
-	- [Magic Layout View of Inverter Standard Cell](#Magic-Layout-View-of-Inverter-Standard-Cell)
-	- [Magic Key Features](#Magic-Key-Features)
-	- [Device Inference](#Device-Inference)
-	- [DRC Errors](#DRC-Errors)
-	- [PEX Extraction with Magic](#PEX-Extraction-with-Magic)
-	- [Spice Wrapper for Simulation](#Spice-Wrapper-for-Simulation)
+	- [Git Clonning and Copying Tech File](#Git-Clonning-and-Copying-Tech-File)
+	- [Standard Cell in Magic](#Standard-cell-in-Magic)
+	- [Extracting Spice File](#Extracting-Spice-File)
+	- [Characterization of Cell](#Characterization of Cell)
 - [Day-4 Layout Timing Analysis and CTS](#Day-4-Layout-Timing-Analysis-and-CTS)
 	- [An Introduciton to LEF Files](#An-Introduciton-to-LEF-Files)
 	- [LEF Generation in Magic](#LEF-Generation-in-Magic)
@@ -71,7 +66,7 @@ The various stages of flow are as shown below.
 
 ![](Images/ASICFLOW.png)
 
-## Day-1-> Inception of Open Source EDA
+## Day-1-> Opensource EDA, OpenLANE, Skywater130 PDK
 
 ### Introduction Openlane FLow
 
@@ -189,8 +184,9 @@ The command to invoke the Magic Tools is
 After Floorplanning, the next step is Placement. Placement is the process of finding a suitable physical location for each cell in the block.
 Placement does not just place the standard cell available in the synthesized netlist, it also optimized the design
 OpenLANE does placement in two stages:
-////////
+
 Global Placement - Optimized but not legal placement. Optimization works to reduce wirelength by reducing half parameter wirelength.
+
 Detailed Placement - Legalizes placement of cells into standard cell rows while adhering to global placement
 
 To run placement in OpenLANE use `run_placement`.
@@ -201,7 +197,7 @@ For placement to converge the overflow value needs to be converging to 0. At the
 
 ![](Images/day2_9.png)
 
-### Viewing Placement in Magic
+### Placement in Magic
 To view placement in Magic go to the placement directory in reults and use
 
      magic -T <magic tech file> lef read <lef file> def read <def file>
@@ -219,15 +215,16 @@ Cell Design consist of following steps-
 
 Standard Cell Libraries consist of cells with different functionality/drive strengths. These cells need to be characterized by liberty files to be used by synthesis tools to determine optimal circuit arrangement.
 Characterization consist of following steps:
-/////////////
-1.Read Model File.
-2.Extract Spice netlist.
-3.Define behavior of Buffer.
-4.Read subcircuit.
-5.Attach necessary power sources.
-6.Apply Stimulas.
-7.Provide necessary Capacitance.
-8.Provide Simulation commands.
+
+
+	1.Read Model File.
+	2.Extract Spice netlist.
+	3.Define behavior of Buffer.
+	4.Read subcircuit.
+	5.Attach necessary power sources.
+	6.Apply Stimulas.
+	7.Provide necessary Capacitance.
+	8.Provide Simulation commands.
 
 
 
@@ -246,6 +243,8 @@ Contains of the VSD directory are:
 Since we are using Magic, the tech file is required, (here sky130A.tech), which is present in the openlane_working_dir/pdks/sky130A/libs.tech/magic folder, so we need to copy it to the vsd directory. Use `cp sky130A.tech /Desktop/work/tools/openlane_working_dir/openLANE_flow/vsdstdcelldesign`
 
 ![](Images/day3_4.PNG)
+
+### Standard Cell in Magic
 
 To invoke the magic use 
     
@@ -296,6 +295,7 @@ Fall Time -This is defined as the time taken for the signal to go from 80% to 20
 Propogation Delay - This is defined as the time difference between the points where the input and output are at 50% of their magnitude. It's experimentally found to be 0.027 ns
 
 ![](Images/day3_14.PNG)
+
 
 
 ## Day 4 Layout Timing Analysis and CTS
