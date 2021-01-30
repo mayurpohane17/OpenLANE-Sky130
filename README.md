@@ -33,21 +33,23 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 	- [Git Clonning and Copying Tech File](#Git-Clonning-and-Copying-Tech-File)
 	- [Standard Cell in Magic](#Standard-cell-in-Magic)
 	- [Extracting Spice File](#Extracting-Spice-File)
+	- [Ngspice Simulation](#Ngspice-Simulation)
 	- [Characterization of Cell](#Characterization-of-Cell)
 	
 - [Day-4 Layout Timing Analysis and CTS](#Day-4-Layout-Timing-Analysis-and-CTS)
-	- [An Introduciton to LEF Files](#An-Introduciton-to-LEF-Files)
-	- [LEF Generation in Magic](#LEF-Generation-in-Magic)
+	- [Introduciton to LEF Files](#Introduciton-to-LEF-Files)
+	- [LEF Generation](#LEF-Generation)
 	- [Including Custom Cells in OpenLANE](#Including-Custom-Cells-in-OpenLANE)
 	- [Fixing Slack Violations](#Fixing-Slack-Violations)
+	- [Upsizing Buffer](#Upsizing-Buffer)
 	- [Clock Tree Synthesis](#SyntheClock-Tree-Synthesissis)
-	- [Viewing Post-CTS Netlist](#Viewing-Post-CTS-Netlist)
-	- [Post-CTS STA Analysis](#Post-CTS-STA-Analysis)
+	- [OpenROAD](#OpenROAD)
 	
-- [Day-5 Final Steps in RTL to GDSII](#Day-5-Final-Steps-in-RTL-to-GDSII)    
-	- [ Power Distribution Network Generation](#Power-Distribution-Network-Generation)
-	- [Global and Detailed Routing](#Global-and-Detailed-Routing)
+- [Day-5 Routing and SPEF Extraction](#Day-5-Routing-and-SPEF-Extraction)    
+	- [Power Distribution Network](#Power-Distribution-Network)
+	- [Routing](#Routing)
 	- [SPEF Extraction](#SPEF-Extraction)
+	- [Modified Netlists](#Modified-Netlists)
 - [Acknowledgement](#acknowledgement)
 - [Contact Information](#contact-information)
 
@@ -272,6 +274,8 @@ Contains of Spice File
 
 ![](Images/day3_7.PNG)
 
+### Ngspice Simulation
+
 To run the simulation with ngspice, invoke the ngspice tool with the spice file as input:
  
     $ ngspice sky130_inv.spice
@@ -303,7 +307,7 @@ Propogation Delay - This is defined as the time difference between the points wh
 
 ## Day-4-> Timing Analysis and CTS
 
-### An Introduction to LEF Files
+### Introduction to LEF Files
 The LEF file is the abstract view of cells. It gives idea about PR boundary, pin position and metal layer information of a cell. 
 
 Technology LEF - Contains layer information, via information, and restricted DRC rules
@@ -331,6 +335,8 @@ All the criteria of the standard cell set are meet here.
 Save the mag file as shown below.
  
 ![](Images/day4_4.PNG)
+
+### LEF Generation
 
 Magic allows to generate cell LEF. To generate the cell LEF file from Magic perform `lef write`.
 
@@ -389,10 +395,11 @@ Slack after updated fanout.
 
 ![](Images/day4_14.PNG)
 
-### Upsizing the Buffers
+### Upsizing Buffers
 
 Fanout updation was not that effeftive so now we resize the bufeers to reduce the slack.But upsizing the buffers also increases the area of chip.
 This modification can be done as follows:- `replace_cell _<net_number>_ <name_of_buffer>`.
+
 ![](Images/day4_15.PNG)
 
 Slack after updating the buffer size.
