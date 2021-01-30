@@ -231,7 +231,7 @@ Characterization consist of following steps:
 
 
 
-## Day 3 Design Library Cell and Characterization using Ngspice
+## Day-3-> Design Library Cell and Characterization using Ngspice
 ### Git Clonning Copying Tech File
 The nickson-jose github repo titled `vsdstdcelldesign` was cloned to the local system using the following command 
     
@@ -301,7 +301,7 @@ Propogation Delay - This is defined as the time difference between the points wh
 
 
 
-## Day 4 Timing Analysis and CTS
+## Day-4-> Timing Analysis and CTS
 
 ### An Introduction to LEF Files
 The LEF file is the abstract view of cells. It gives idea about PR boundary, pin position and metal layer information of a cell. 
@@ -332,7 +332,7 @@ Save the mag file as shown below.
  
 ![](Images/day4_4.PNG)
 
-Magic allows to generate cell LEF. To generate the cell LEF file from Magic perform:
+Magic allows to generate cell LEF. To generate the cell LEF file from Magic perform `lef write`.
 
 ![](Images/day4_5.PNG)
 
@@ -419,11 +419,9 @@ Execute the following commands for timing analysis:-
 	% link_design <design_name> 
 	% read_sdc <Location_of_sdc_file>
 	% set_propagated_clock [all_clocks]
-	% report_checks -path_delay min_max -fields {slew trans net cap input_pin} -format full_clock_expanded -digits 4
+	% report_checks -path_delay min_max -format full_clock_expanded -digits 4
 	
 Below images are the implementation of above commands.
-
-
 
 ![](Images/day4_20.PNG)
 
@@ -435,20 +433,60 @@ Here we can see that now the timing requirements are meet.
 
 ![](Images/day4_23.PNG)
 
+
+
 ## Day 5 Final Steps in RTL to GDSII
+
+### Power Distribution Network
+
+The PDN feature within OpenLANE will create:
+
+	1.Power ring global to the entire core
+	2.Power halo local to any preplaced cells
+	3.Power straps to bring power into the center of the chip
+	4.Power rails for the standard cells
+	
+To generate the PDN in OpenLANE use `gen_pdn`
+
 ![](Images/day5_1.PNG)
+
+### Routing
+OpenLANE uses TritonRoute as the routing engine for physical implementations of designs. Routing consists of two stages:
+
+Global Routing - Routing guides are generated for interconnects on our netlist defining what layers, and where on the chip each of the nets will be reputed
+
+Detailed Routing - Metal traces are iteratively laid across the routing guides to physically implement the routing guides.
+
+To run routing in OpenLANE use `run_routing`.
 
 ![](Images/day5_2.PNG)
 
+TritonRoute offers multiple routing strategies which have their own pros and cons. The two main strategies adopted are "0" and "14" (also called TritonRoute14).We are using Routing Strategy `0` here. One can understand which strategy is put into place by executing `% echo $::env(ROUTING_STRATEGY)` in OpenLANE. By default, OpenLANE executes strategy 0.
+
 ![](Images/day5_3.PNG)
+
+Routing Completed:
 
 ![](Images/day5_4.PNG)
 
+Here you can see the no of violations in the routing.Violations can be reduced using diffrent strategy which take more time to execute.
+
 ![](Images/day5_5.PNG)
+
+### SPEF Extraction
+
+The SPEF EXTRACTOR is yet to be integrated to OpenLANE so we have to Navigate to the tools directory, there SPEF_Extractor can be find. We have to run the python file named `main.py` in SPEF_EXTRACTOR directory. The command to do this is as folows:
+		
+	$ python3 main.py /designs/picorv32a/runs/<tag_name>/tmp/merged.lef /designs/picorv32a/runs/<tag_name>/results/routing/picorv32a.def
 
 ![](Images/day5_6.PNG)
 
+The SPEF file is then written into the routing directory under results as can be seen here:-
+
 ![](Images/day5_7.PNG)
+
+### Modified Netlists
+At certain stages, the original netlist we worked with has been modified and added subsequently to the synthesis folder under results because each stage is responsible for performing certain actions that can optimise the design and keep the physcial design flow smooth and running.
 
 ![](Images/day5_8.PNG)
 
