@@ -29,7 +29,7 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 	- [Placement in Magic](#Viewing-Placement-in-Magic)
 	- [Standard Cell Characterization](#Standard-Cell-Characterization)
   
-- [Day-3 - Design Library Cell](#Day-3-Design-Library-Cell)
+- [Day-3 - Design Library Cell and Characterization using Ngspice](#Day-3-Design-Library-Cell-and-Characterization-using-Ngspice)
 	- [Git Clonning and Copying Tech File](#Git-Clonning-and-Copying-Tech-File)
 	- [Standard Cell in Magic](#Standard-cell-in-Magic)
 	- [Extracting Spice File](#Extracting-Spice-File)
