@@ -16,6 +16,7 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 	- [Prepare Design](#Prepare-Design)
  	- [Synthesis](#Synthesis)
 	- [Configuration Files](#Configuration-Files)
+	
 - [Day-2 Floorplanning and Placement](#Day-2-Floorplanning-and-Placement)
 	- [Aspect Ratio and Utilization Factor](#Aspect-Ratio-and-Utilization-Factor)
 	- [Preplaced Cells](#Preplaced-Cells)
@@ -32,7 +33,8 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 	- [Git Clonning and Copying Tech File](#Git-Clonning-and-Copying-Tech-File)
 	- [Standard Cell in Magic](#Standard-cell-in-Magic)
 	- [Extracting Spice File](#Extracting-Spice-File)
-	- [Characterization of Cell](#Characterization of Cell)
+	- [Characterization of Cell](#Characterization-of-Cell)
+	
 - [Day-4 Layout Timing Analysis and CTS](#Day-4-Layout-Timing-Analysis-and-CTS)
 	- [An Introduciton to LEF Files](#An-Introduciton-to-LEF-Files)
 	- [LEF Generation in Magic](#LEF-Generation-in-Magic)
@@ -41,6 +43,7 @@ This repository contains the RTL to GDSII flow implemention using the open-sourc
 	- [Clock Tree Synthesis](#SyntheClock-Tree-Synthesissis)
 	- [Viewing Post-CTS Netlist](#Viewing-Post-CTS-Netlist)
 	- [Post-CTS STA Analysis](#Post-CTS-STA-Analysis)
+	
 - [Day-5 Final Steps in RTL to GDSII](#Day-5-Final-Steps-in-RTL-to-GDSII)    
 	- [ Power Distribution Network Generation](#Power-Distribution-Network-Generation)
 	- [Global and Detailed Routing](#Global-and-Detailed-Routing)
@@ -286,11 +289,11 @@ To run the simulation with ngspice, invoke the ngspice tool with the spice file 
 The above plot can be used to compute the rise time, fall time and propagation delay. Calculating the values of these parameters is called as characterization of the cell. They are:-
 
 Rise Time - This is defined as the time taken for the signal to go from 20% to 80%. It was found to be 0.0637 ns.
-![](Images/day3_10.PNG)   ![](Images/day3_11.PNG) 
+![](Images/day3_10.PNG)     ![](Images/day3_11.PNG) 
 
 Fall Time -This is defined as the time taken for the signal to go from 80% to 20%.  It was found to be 0.04237 ns
 
- ![](Images/day3_12.PNG)  ![](Images/day3_13.PNG)
+ ![](Images/day3_12.PNG)    ![](Images/day3_13.PNG)
 
 Propogation Delay - This is defined as the time difference between the points where the input and output are at 50% of their magnitude. It's experimentally found to be 0.027 ns
 
